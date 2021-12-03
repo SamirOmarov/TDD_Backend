@@ -6,7 +6,6 @@ from app.config import get_settings, Settings
 
 
 class Todo(BaseModel):
-    id: int
     title: str
 
 

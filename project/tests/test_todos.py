@@ -3,7 +3,7 @@ import pytest
 
 
 def test_create_todo(test_app):
-    response = test_app.post("/todo/", data=json.dumps({"id": 2, "title": "TDD Test"}))
+    response = test_app.post("/todo/", data=json.dumps({"title": "TDD Test"}))
     assert response.status_code == 201
     assert response.json()["title"] == "TDD Test"
 
@@ -14,21 +14,16 @@ def test_create_todo_invalid_json(test_app):
     assert response.json() == {
         "detail": [
             {
-                "loc": ["body", "id"],
-                "msg": "field required",
-                "type": "value_error.missing",
-            },
-            {
                 "loc": ["body", "title"],
                 "msg": "field required",
                 "type": "value_error.missing",
-            },
+            }
         ]
     }
 
 
 def test_get_all_todos(test_app):
-    response = test_app.post("/todo/", data=json.dumps({"id": 1, "title": "TDD Test"}))
+    response = test_app.post("/todo/", data=json.dumps({"title": "TDD Test"}))
     todo_id = response.json()["id"]
 
     response = test_app.get("/todo/")
