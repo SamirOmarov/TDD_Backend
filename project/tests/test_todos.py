@@ -24,5 +24,5 @@ def test_create_todo_invalid_json(test_app):
 
 def test_get_all_todos(test_app):
     response = test_app.post("/todo/", data=json.dumps({"title": "TDD Test"}))
-    assert response.status_code == 200
+    assert response.status_code == 201
     assert response.json() == {"title": "TDD Test"}
