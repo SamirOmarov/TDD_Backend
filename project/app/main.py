@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends, HTTPException
 from pydantic import BaseModel
 from typing import Optional, List
-
+from fastapi.middleware.cors import CORSMiddleware
 from app.config import get_settings, Settings
 
 
@@ -11,6 +11,16 @@ class Todo(BaseModel):
 
 
 app = FastAPI(title="TDD Todo API")
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 store_todo = []
 
