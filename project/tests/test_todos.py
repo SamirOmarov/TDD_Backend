@@ -12,7 +12,7 @@ def test_delete_todo(test_app):
     response = test_app.delete("/todo/0")
     assert response.status_code == 200
     assert response.json() == {
-        "name": "TDD Test",
+        "title": "TDD Test",
     }
 
 
