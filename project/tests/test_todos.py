@@ -8,6 +8,14 @@ def test_create_todo(test_app):
     assert response.json()["title"] == "TDD Test"
 
 
+def test_delete_todo(test_app):
+    response = test_app.delete("/todo/0")
+    assert response.status_code == 200
+    assert response.json() == {
+        "name": "TDD Test",
+    }
+
+
 def test_create_todo_invalid_json(test_app):
     response = test_app.post("/todo/", data=json.dumps({}))
     assert response.status_code == 422

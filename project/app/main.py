@@ -38,7 +38,18 @@ async def create_todo(todo: Todo):
     store_todo.append(todo)
     return todo
 
+
 @app.get("/todo/", response_model=List[Todo])
 async def get_all_todos():
     return store_todo
 
+
+@app.delete("/todo/{id}")
+async def delete_todo(id: int):
+    try:
+        obj = store_todo[id]
+        store_todo.pop(id)
+        return obj
+
+    except:
+        raise HTTPException(status_code=404, detail="Todo Not Found")
